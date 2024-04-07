@@ -7,7 +7,6 @@ const Sidebaar = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
-
     return (
         <div className="flex h-screen">
             {/* Sidebar */}
