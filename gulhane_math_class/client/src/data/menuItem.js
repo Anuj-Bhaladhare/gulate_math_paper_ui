@@ -10,6 +10,7 @@ const menuItem = [
         path: '/dashboard/paper-formate', 
         name: 'Paper Formate', 
         icon: <FaUserAlt /> 
+        
     },
     { 
         path: '/dashboard/recent-paper', 
