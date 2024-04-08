@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useLogin from "./hook";
 
 const Login = () => {
     const navigate = useNavigate();
+    const [{ userLogin }] = useLogin();
+
+    const values = {
+        email: '',
+        password: ''
+    }
+
+    const [initialState, setInitialState] = useState(values);
 
     const handleUserLogin = () => {
-        navigate('/dashboard');
+        userLogin(initialState).then( (res) => {
+            if(res.status === 200) {
+                navigate('/dashboard/dashboard');
+            }
+        }).catch( (err) => {
+            console.log("user not login", err)
+        })
     };
 
     return (
@@ -22,6 +37,8 @@ const Login = () => {
                             id="username"
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                             placeholder="Enter your username"
+                            value={initialState.email}
+                            onChange={(e) => setInitialState({ ...initialState, email: e.target.value })}
                         />
                     </div>
                     <div>
@@ -33,6 +50,8 @@ const Login = () => {
                             id="password"
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                             placeholder="Enter your password"
+                            value={initialState.password}
+                            onChange={(e) => setInitialState({ ...initialState, password: e.target.value })}
                         />
                     </div>
                     <button
