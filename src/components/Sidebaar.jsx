@@ -28,6 +28,7 @@ const Sidebaar = ({ children }) => {
                         ))}
                     </div>
                 </div>
+                
                 <div className="absolute bottom-4 left-4">
                     <FaBars className="text-white cursor-pointer" onClick={toggle} />
                 </div>
