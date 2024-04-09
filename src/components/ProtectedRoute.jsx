@@ -7,9 +7,11 @@ const ProtectedRoute = () => {
 
   if (isAuthenticated) {
     return (
-      <Sidebaar>
-        <Outlet /> {/* Renders nested child routes */}
-      </Sidebaar>
+      <>
+        <Sidebaar>
+          <Outlet />
+        </Sidebaar>
+      </>
     );
   } else {
     return <Navigate to="/login" replace />;
