@@ -22,20 +22,15 @@ const App = () => {
 
         {/* Protected routes */}
         <Route
-          path="/dashboard/*"
-          element={
-            <ProtectedRoute>
-              {/* <Sidebaar> */}
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="paper-formate" element={<PaperFormate />} />
-                <Route path="recent-paper" element={<RecentPaper />} />
-                <Route path="all-paper" element={<AllPaper />} />
-                <Route path="student-list" element={<StudentList />} />
-                <Route path="user" element={<UserDetails />} />
-              {/* </Sidebaar> */}
-            </ProtectedRoute>
-          }
-        />
+          element={ <ProtectedRoute /> }
+        >
+          <Route path="/dashboard/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/paper-formate" element={<PaperFormate />} />
+          <Route path="/dashboard/recent-paper" element={<RecentPaper />} />
+          <Route path="/dashboard/all-paper" element={<AllPaper />} />
+          <Route path="/dashboard/student-list" element={<StudentList />} />
+          <Route path="/dashboard/user" element={<UserDetails />} />
+        </Route>
 
         {/* Catch-all route for 404 Page Not Found */}
         <Route path="*" element={<NotFound />} />

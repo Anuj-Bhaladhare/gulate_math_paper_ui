@@ -7,11 +7,12 @@ const ProtectedRoute = () => {
 
   if (isAuthenticated) {
     return (
-      <>
-        <Sidebaar>
+      <div className="flex">
+        <Sidebaar />
+        <div className="flex-grow p-4">
           <Outlet />
-        </Sidebaar>
-      </>
+        </div>
+      </div>
     );
   } else {
     return <Navigate to="/login" replace />;
