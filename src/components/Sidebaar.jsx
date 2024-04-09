@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
 import menuItem from '../data/menuItem';
 
-const Sidebaar = ({ children }) => {
+const Sidebaar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
@@ -165,7 +165,7 @@ const Sidebaar = ({ children }) => {
 
           </motion.div>
   
-          <main>{children}</main>
+          {/* <main>{children}</main> */}
 
         </div>
       </>
