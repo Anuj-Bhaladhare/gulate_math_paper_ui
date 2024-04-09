@@ -10,6 +10,8 @@ import AllPaper from "./pages/all_paper/AllPaper";
 import StudentList from "./pages/students_list/StudentList";
 import UserDetails from "./pages/user_details/UserDetails";
 import NotFound from "./components/NotFound";
+import Sidebaar from "./components/Sidebaar";
+import "./App.css";
 
 const App = () => {
   return (
@@ -23,13 +25,14 @@ const App = () => {
           path="/dashboard/*"
           element={
             <ProtectedRoute>
-              <Route path="dashboard" element={<Dashboard />} />
-              {/* <Dashboard /> */}
-              <Route path="paper-formate" element={<PaperFormate />} />
-              <Route path="recent-paper" element={<RecentPaper />} />
-              <Route path="all-paper" element={<AllPaper />} />
-              <Route path="student-list" element={<StudentList />} />
-              <Route path="user" element={<UserDetails />} />
+              {/* <Sidebaar> */}
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="paper-formate" element={<PaperFormate />} />
+                <Route path="recent-paper" element={<RecentPaper />} />
+                <Route path="all-paper" element={<AllPaper />} />
+                <Route path="student-list" element={<StudentList />} />
+                <Route path="user" element={<UserDetails />} />
+              {/* </Sidebaar> */}
             </ProtectedRoute>
           }
         />
