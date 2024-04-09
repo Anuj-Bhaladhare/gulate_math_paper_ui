@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaSignOutAlt } from 'react-icons/fa';
 import menuItem from '../data/menuItem';
 
 const Sidebaar = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+
+    const handalLogOut = () => {
+        localStorage.removeItem('isAuthenticated');
+        window.location.reload();
+    }
 
     return (
         <div className="flex h-screen">
@@ -31,6 +36,7 @@ const Sidebaar = ({ children }) => {
                 
                 <div className="absolute bottom-4 left-4">
                     <FaBars className="text-white cursor-pointer" onClick={toggle} />
+                    <FaSignOutAlt onClick={() => handalLogOut()} className="text-white cursor-pointer" />
                 </div>
             </div>
 
