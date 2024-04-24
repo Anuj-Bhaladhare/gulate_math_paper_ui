@@ -1,32 +1,44 @@
-import React from 'react';
-import { useSelector, useDispatch} from 'react-redux'
-import { decrement, increment } from '../../redux/slices/counterSlices';
+import React, { useState } from 'react';
 
 const Dashboard = () => {
+  const [dayValue, setDayValue] = useState('sunday');
+  const [monthValue, setMonthValue] = useState('jan');
+  const [name, setName] = useState('Anuj'); 
 
-  const dispatch = useDispatch()
+  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-  const count = useSelector( (state) => state?.counter?.value );
+  const dayToNameMap = {
+    sunday: 'Anuj',
+    monday: 'Ankur',
+  };
 
-  const handalIncrement = () => {
-    dispatch(increment());
-  }
-  
-  const handalDecrement = () => {
-    dispatch(decrement());
-  }
+  const handleDayChange = (e) => {
+    const selectedDay = e.target.value;
+    setDayValue(selectedDay);
+    setName(dayToNameMap[selectedDay] || "No special name"); 
+  };
 
   return (
     <div>
-      <h1>hii this is dashboard</h1>
-
-      <div>
-        <button onClick={() => handalIncrement()}>Increment</button>
-        <div>{count}</div>
-        <button onClick={() => handalDecrement()}>Decrement</button>
-      </div>
+      <h1>Dashboard</h1>
+      <form>
+        <select value={dayValue} onChange={handleDayChange}>
+          {days.map((day, index) => (
+            <option key={index} value={day}>{day}</option>
+          ))}
+        </select>
+        <br />
+        <select value={monthValue} onChange={(e) => setMonthValue(e.target.value)}>
+          {months.map((month, index) => (
+            <option key={index} value={month}>{month}</option>
+          ))}
+        </select>
+        <br />
+        <p>Selected Name: {name}</p> 
+      </form>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
