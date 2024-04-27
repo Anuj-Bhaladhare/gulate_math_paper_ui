@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLogin from "./hook";
+import {toast} from "react-hot-toast";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -21,10 +22,12 @@ const Login = () => {
 
     const handleUserLogin = () => {
         userLogin(initialState).then( (res) => {
+            toast.success("Login successfull");
             if(res.status === 200) {
                 navigate('/dashboard/dashboard');
             }
         }).catch( (err) => {
+            toast.error(err?.message);
             console.log("user not login", err)
         })
     };

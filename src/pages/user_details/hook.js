@@ -5,15 +5,11 @@ const useUserDetails = () => {
         console.log("email", email);
         try {
             const response = await relayService({
-                url: "/getuser",
-                method: "GET",
-                params: {
-                    email: email
-                }
+                url: `/getuser/${email}`,
+                method: "GET"
             });
-            console.log("response", response);
             if (response.status === 200) {
-                return response.data;
+                return response?.data?.user;
             }
         } catch (error) {
             console.log("Error occurred in getting user details: ", error);
