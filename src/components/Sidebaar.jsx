@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
 import menuItem from '../data/menuItem';
+import { toast } from "react-hot-toast";
 
 const Sidebaar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,7 @@ const Sidebaar = () => {
     const handalLogOut = () => {
         localStorage.removeItem("isAuthenticated");
         window.location.reload();
+        toast.success("Logout successfully");
     }
     const inputAnimation = {
       hidden: {
