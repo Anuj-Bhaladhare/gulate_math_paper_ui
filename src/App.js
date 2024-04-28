@@ -16,6 +16,8 @@ import Student12thList from "./pages/student_12th_list/Student12thList";
 import BacklogMath1 from "./pages/backlog_student_list/math_1/BacklogMath1";
 import BacklogMath2 from "./pages/backlog_student_list/math_2/BacklogMath2";
 import BacklogMath3 from "./pages/backlog_student_list/math_3/BacklogMath3";
+import AddStudentM1 from "./pages/students_list/math_1/AddStudentM1";
+import EditViewStudentM1 from "./pages/students_list/math_1/EditViewStudentM1";
 
 const App = () => {
   return (
@@ -32,7 +34,11 @@ const App = () => {
           <Route path="/dashboard/papers" element={<Papers />} />
 
           <Route path="/dashboard/student/m1" element={<StudentListM1 />} />
+          <Route path="/dashboard/student/m1/add-student" element={<AddStudentM1 />} />
+          <Route path="/dashboard/student/m1/:editView" element={<EditViewStudentM1 />} />
+
           <Route path="/dashboard/student/m2" element={<StudentListM2 />} />
+
           <Route path="/dashboard/student/m3" element={<StudentListM3 />} />
 
           <Route path="/dashboard/student/backlog/m1" element={<BacklogMath1 />} />
