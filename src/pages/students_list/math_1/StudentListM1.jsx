@@ -23,6 +23,8 @@ const StudentListM1 = () => {
     });
   }, []);
 
+  const filteredNodes = nodes.filter(node => node.name.toLowerCase().includes(globalFilter.toLowerCase()));
+
   const actionBodyTemplate = (rowData) => {
     return (
        <>
@@ -62,8 +64,7 @@ const StudentListM1 = () => {
   };
 
   const onGlobalFilterChange = (e) => {
-    // const value = e.target.value;
-    // let _filters = { ...filters };
+    setGlobalFilter(e.target.value);
   }
 
   return (
@@ -74,7 +75,7 @@ const StudentListM1 = () => {
           <input
             type="text"
             value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
+            onChange={onGlobalFilterChange}
             placeholder="Search..."
             className="p-2 border border-gray-300 rounded-md shadow-sm mb-2"
           />
@@ -86,21 +87,22 @@ const StudentListM1 = () => {
       </div>
       <div className="px-4 py-2">
         <div className="card">
-        <DataTable 
-  value={nodes} 
-  stripedRows 
-  tableStyle={{ minWidth: '50rem' }}
-  onRowClick={(event) => onRowSelect(event.data)}
-  rowClassName={rowClassName}
->
-  <Column field="_id" header="Roll No"></Column>
-  <Column field="name" header="Name"></Column>
-  <Column field="PassinsStatus" header="Pass / Fail"></Column>
-  <Column field="feesh" header="Fee Status"></Column>
-  <Column field="amount" header="Pending Amount"></Column>
-  <Column header="Action" body={actionBodyTemplate}></Column>
-</DataTable>
-
+          <DataTable 
+            value={filteredNodes} 
+            stripedRows 
+            tableStyle={{ minWidth: '50rem' }}
+            onRowClick={(event) => onRowSelect(event.data)}
+            rowClassName={rowClassName}
+            globalFilter={globalFilter}
+            emptyMessage="No records found"
+          >
+            <Column field="_id" header="Roll No"></Column>
+            <Column field="name" header="Name" filter filterPlaceholder="Search by name" filterMatchMode="contains"></Column>
+            <Column field="PassinsStatus" header="Pass / Fail"></Column>
+            <Column field="feesh" header="Fee Status"></Column>
+            <Column field="amount" header="Pending Amount"></Column>
+            <Column header="Action" body={actionBodyTemplate}></Column>
+          </DataTable>
         </div>
       </div>
     </div>
