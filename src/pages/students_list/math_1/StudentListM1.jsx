@@ -6,12 +6,13 @@ import useStudentListM1 from "./hook";
 import { Button } from 'primereact/button';
 import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 
 const StudentListM1 = () => {
   const [nodes, setNodes] = useState([]);
   const [globalFilter, setGlobalFilter] = useState('');
-  const [{ getStudentListM1 }] = useStudentListM1();
+  const [{ getStudentListM1, deleteStudent_M1 }] = useStudentListM1();
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -35,22 +36,29 @@ const StudentListM1 = () => {
     );
   };
 
+  const rowClassName = (rowData) => {
+    return 'p-datatable-row p-selectable-row hover-pointer-student';
+  };
+
   const onRowSelect = (rowData) => {
-      console.log(rowData);
-  }
+    Navigate(`/dashboard/student/m1/viewStudent`, { state: { rowData } });  }
 
   const addStudent = () => {
-    Navigate("/dashboard/student/m1/add-student");
+    Navigate("/dashboard/student/m1/add-m1student");
   }
 
   const onEdit = (rowData) => {
-    console.log('Edit action for:', rowData);
-    // Implement your edit logic here
+    Navigate(`/dashboard/student/m1/editStudent`, { state: { rowData } });
   };
 
   const onDelete = (rowData) => {
-    console.log('Delete action for:', rowData);
-    // Implement your delete logic here
+      const { _id } = rowData;
+      deleteStudent_M1(_id).then(res => {
+        toast.success(res.message);
+        window.location.reload();
+      }).catch((error) => {
+        toast.error(error.message);
+      })
   };
 
   const onGlobalFilterChange = (e) => {
@@ -78,18 +86,21 @@ const StudentListM1 = () => {
       </div>
       <div className="px-4 py-2">
         <div className="card">
-          <DataTable 
-            value={nodes} 
-            stripedRows 
-            tableStyle={{ minWidth: '50rem' }} 
-          >
-            <Column field="_id" header="Roll No"></Column>
-            <Column field="name" header="Name"></Column>
-            <Column field="PassinsStatus" header="Pass / Fail"></Column>
-            <Column field="feesh" header="Fee Status"></Column>
-            <Column field="amount" header="Pending Amount"></Column>
-            <Column header="Action" body={actionBodyTemplate}></Column>
-          </DataTable>
+        <DataTable 
+  value={nodes} 
+  stripedRows 
+  tableStyle={{ minWidth: '50rem' }}
+  onRowClick={(event) => onRowSelect(event.data)}
+  rowClassName={rowClassName}
+>
+  <Column field="_id" header="Roll No"></Column>
+  <Column field="name" header="Name"></Column>
+  <Column field="PassinsStatus" header="Pass / Fail"></Column>
+  <Column field="feesh" header="Fee Status"></Column>
+  <Column field="amount" header="Pending Amount"></Column>
+  <Column header="Action" body={actionBodyTemplate}></Column>
+</DataTable>
+
         </div>
       </div>
     </div>
