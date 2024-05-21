@@ -2,21 +2,41 @@ import React from 'react';
 import { Button } from 'primereact/button';    
 import { ColorPicker } from 'primereact/colorpicker';
 import Navbar from '../../components/Navbar';
+import PdfViewer from '../../components/PdfViewer';
+import PrintComponent from '../../components/PrintComponent';
 
 
 
 const Papers = () => {
 
-    const [color, setColor] = React.useState(null);
+  class PrintButton extends React.Component {
+    handlePrint = () => {
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>Print</title>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write('<div style="margin:20px;">');
+        printWindow.document.write(this.props.contentToPrint());
+        printWindow.document.write('</div></body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    };
 
-    console.log(color)
+    render() {
+        return (
+            <button onClick={this.handlePrint}>Print</button>
+        );
+    }
+}
+
   return (
     <div>
         <div>
            <Navbar />
         </div>
-        <Button>Hello Anuj</Button>
-        <ColorPicker value={color} onChange={(e) => setColor(e.value)} />
+        {/* <PdfViewer /> */}
+        <PrintComponent />
+
+        <PrintButton contentToPrint={() => <PrintComponent />} />
 
     </div>
   )
