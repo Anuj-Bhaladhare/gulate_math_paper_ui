@@ -92,7 +92,7 @@ const Sidebaar = () => {
                     exit="hidden"
                     className="logo"
                   >
-                    DoSomeCoding
+                    Gulhane Institute
                   </motion.h1>
                 )}
               </AnimatePresence>
